@@ -54,7 +54,7 @@ module Axlsx
     # you need to set this.
     attr_accessor :formula_value
 
-    # An array of available inline styes.
+    # An array of available inline styes..
     # TODO change this to a hash where each key defines attr name and validator (and any info the validator requires)
     # then move it out to a module so we can re-use in in other classes.
     # needs to define bla=(v) and bla methods on the class that hook into a
