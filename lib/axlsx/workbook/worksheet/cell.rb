@@ -123,11 +123,12 @@ module Axlsx
 
     # Indicates if the cell is good for shared string table
     def plain_string?
-      type == :string &&         # String typed
+      type == :text ||
+      (type == :string &&         # String typed
         !is_text_run? &&          # No inline styles
         !@value.nil? &&           # Not nil
         !@value.empty? &&         # Not empty
-        !@value.start_with?(?=)  # Not a formula
+        !@value.start_with?(?=))  # Not a formula
     end
 
     # The inline font_name property for the cell

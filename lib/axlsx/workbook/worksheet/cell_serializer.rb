@@ -109,12 +109,6 @@ module Axlsx
         str << '</is>'
       end
 
-      def inline_text_serialization(cell, str = '')
-        str << 't="s"><is>'
-        run_xml_string cell, str
-        str << '</is>'
-      end
-
       # Serializes cells that are type string
       # @param [Cell] cell The cell that is being serialized
       # @param [String] str The string the serialized content will be appended to.
@@ -141,6 +135,14 @@ module Axlsx
         else
           value_serialization 's', cell.ssti, str
         end
+      end
+
+      # Serializes cells that are of the type text
+      # @param [Cell] cell The cell that is being serialized
+      # @param [String] str The string the serialized content will be appended to.
+      # @return [String]
+      def text(cell, str='')
+        value_serialization 's', cell.ssti, str
       end
 
       # Serializes cells that are of the type text
