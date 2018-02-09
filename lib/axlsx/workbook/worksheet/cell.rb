@@ -54,7 +54,7 @@ module Axlsx
     # you need to set this.
     attr_accessor :formula_value
 
-    # An array of available inline styes.
+    # An array of available inline styes..
     # TODO change this to a hash where each key defines attr name and validator (and any info the validator requires)
     # then move it out to a module so we can re-use in in other classes.
     # needs to define bla=(v) and bla methods on the class that hook into a
@@ -66,7 +66,7 @@ module Axlsx
                      :vertAlign, :sz, :color, :scheme].freeze
 
     CELL_TYPES = [:date, :time, :float, :integer, :richtext,
-                  :string, :boolean, :iso_8601].freeze
+                  :string, :boolean, :iso_8601, :text].freeze
 
     # The index of the cellXfs item to be applied to this cell.
     # @return [Integer]
@@ -123,11 +123,12 @@ module Axlsx
 
     # Indicates if the cell is good for shared string table
     def plain_string?
-      type == :string &&         # String typed
+      type == :text ||
+      (type == :string &&         # String typed
         !is_text_run? &&          # No inline styles
         !@value.nil? &&           # Not nil
         !@value.empty? &&         # Not empty
-        !@value.start_with?(?=)  # Not a formula
+        !@value.start_with?(?=))  # Not a formula
     end
 
     # The inline font_name property for the cell

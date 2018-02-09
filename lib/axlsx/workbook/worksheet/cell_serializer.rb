@@ -137,6 +137,14 @@ module Axlsx
         end
       end
 
+      # Serializes cells that are of the type text
+      # @param [Cell] cell The cell that is being serialized
+      # @param [String] str The string the serialized content will be appended to.
+      # @return [String]
+      def text(cell, str='')
+        value_serialization 's', cell.ssti, str
+      end
+
       private
 
       def numeric(cell, str = '')
